@@ -4,7 +4,10 @@
   "package": "com.terriblefriends.itemshadowfixes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PlayerManagerMixin"
+    "PlayerManagerMixin",
+    "PlayerEntityMixin",
+    "PlayerInventoryMixin",
+    "WorldSaveHandlerMixin"
   ],
   "client": [
   ],
