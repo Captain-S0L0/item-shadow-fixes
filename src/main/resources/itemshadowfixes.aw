@@ -10,4 +10,7 @@ accessible field net/minecraft/block/entity/ShulkerBoxBlockEntity inventory Lnet
 accessible field net/minecraft/block/entity/BarrelBlockEntity inventory Lnet/minecraft/util/collection/DefaultedList;
 accessible field net/minecraft/block/entity/BrewingStandBlockEntity inventory Lnet/minecraft/util/collection/DefaultedList;
 
+accessible field net/minecraft/server/integrated/IntegratedPlayerManager userData Lnet/minecraft/nbt/NbtCompound;
+
 accessible method net/minecraft/server/world/ServerLightingProvider updateChunkStatus (Lnet/minecraft/util/math/ChunkPos;)V
+accessible method net/minecraft/server/integrated/IntegratedPlayerManager savePlayerData (Lnet/minecraft/server/network/ServerPlayerEntity;)V

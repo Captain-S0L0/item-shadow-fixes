@@ -1,5 +1,6 @@
 package com.terriblefriends.itemshadowfixes.mixin;
 
+import com.terriblefriends.itemshadowfixes.access.BlockEntityAccessor;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
@@ -130,7 +131,7 @@ public class ThreadedAnvilChunkStorageMixin {
                     if (blockEntity != null && !blockEntity.isRemoved()) {
                         //nbtCompound = blockEntity.createNbtWithIdentifyingData();
 
-
+                        nbtCompound = ((BlockEntityAccessor)blockEntity).createNbtWithIdentifyingDataDestroyShadows();
 
                         //
                         nbtCompound.putBoolean("keepPacked", false);
@@ -150,10 +151,10 @@ public class ThreadedAnvilChunkStorageMixin {
                 if (chunk instanceof ProtoChunk) {
                     BlockEntity blockEntity = chunk.getBlockEntity(blockPos);
                     return blockEntity != null ?
-                            //blockEntity.createNbtWithIdentifyingData()
+                            blockEntity.createNbtWithIdentifyingData()
 
 
-                            //
+
                             : chunk.blockEntityNbts.get(blockPos);
                 }
 

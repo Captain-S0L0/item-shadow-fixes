@@ -9,8 +9,8 @@
     "PlayerInventoryMixin",
     "WorldSaveHandlerMixin",
     "ThreadedAnvilChunkStorageMixin",
-    "IntegratedPlayerManagerMixin",
-    "EnderChestInventoryMixin"
+    "EnderChestInventoryMixin",
+    "BlockEntityMixin"
   ],
   "client": [
   ],

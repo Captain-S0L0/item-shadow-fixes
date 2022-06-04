@@ -2,8 +2,10 @@ package com.terriblefriends.itemshadowfixes.mixin;
 
 import com.terriblefriends.itemshadowfixes.access.PlayerInventoryAccessor;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.util.collection.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(PlayerInventory.class)

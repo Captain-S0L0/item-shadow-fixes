@@ -39,4 +39,20 @@ public class WorldSaveHandlerMixin implements WorldSaveHandlerAccessor {
             }
         }
     }
+
+    public void savePlayerDataDestroyShadowsSingleplayer(PlayerEntity player, NbtCompound playerNbt) {
+        try {
+            File file = File.createTempFile(player.getUuidAsString() + "-", ".dat", playerDataDir);
+            NbtIo.writeCompressed(playerNbt, file);
+            File file2 = new File(playerDataDir, player.getUuidAsString() + ".dat");
+            File file3 = new File(playerDataDir, player.getUuidAsString() + ".dat_old");
+            Util.backupAndReplace(file2, file, file3);
+        } catch (Exception var6) {
+            LOGGER.warn("Failed to save player data for {}", player.getName().getString());
+            StackTraceElement[] stack = var6.getStackTrace();
+            for (StackTraceElement e : stack) {
+                LOGGER.warn(e.toString());
+            }
+        }
+    }
 }
