@@ -1,23 +1,26 @@
 package com.terriblefriends.itemshadowfixes.mixin;
 
-import net.minecraft.block.entity.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.server.world.ThreadedAnvilChunkStorage;
-import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.ChunkSerializer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkStatus;
+import net.minecraft.world.chunk.ProtoChunk;
+import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.poi.PointOfInterestStorage;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+import java.util.Iterator;
 
 @Mixin(ThreadedAnvilChunkStorage.class)
 public class ThreadedAnvilChunkStorageMixin {
@@ -28,7 +31,7 @@ public class ThreadedAnvilChunkStorageMixin {
     ThreadedAnvilChunkStorage TACS_instance = (ThreadedAnvilChunkStorage) (Object) this;
     @Shadow private byte mark(ChunkPos pos, ChunkStatus.ChunkType type) {return 0;}
 
-    @Inject(at=@At("HEAD"),method="Lnet/minecraft/server/world/ThreadedAnvilChunkStorage;save(Lnet/minecraft/world/chunk/Chunk;)Z", cancellable = true)
+    /*@Inject(at=@At("HEAD"),method="Lnet/minecraft/server/world/ThreadedAnvilChunkStorage;save(Lnet/minecraft/world/chunk/Chunk;)Z", cancellable = true)
     private void testHook(Chunk chunk, CallbackInfoReturnable<Boolean> cir) {
         pointOfInterestStorage.saveChunk(chunk.getPos());
         if (!chunk.needsSaving()) {
@@ -53,6 +56,7 @@ public class ThreadedAnvilChunkStorageMixin {
                 NbtCompound nbtCompound = ChunkSerializer.serialize(this.world, chunk);
 
                 if (!this.world.getChunkManager().isChunkLoaded(chunk.getPos().x, chunk.getPos().z)) {
+
 
                     for (BlockPos blockPos : chunk.getBlockEntityPositions()) {
                         BlockEntity blockEntity = chunk.getBlockEntity(blockPos);
@@ -108,5 +112,56 @@ public class ThreadedAnvilChunkStorageMixin {
         }
 
         if (cir.isCancellable()) {cir.cancel();}
+    }*/
+
+    @Redirect(at=@At(value="INVOKE",target="Lnet/minecraft/world/ChunkSerializer;serialize(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/world/chunk/Chunk;)Lnet/minecraft/nbt/NbtCompound;"),method="save(Lnet/minecraft/world/chunk/Chunk;)Z")
+    private NbtCompound serializeDestroyShadows(ServerWorld world, Chunk chunk) {
+        NbtCompound returnValue = ChunkSerializer.serialize(world,chunk);
+
+        if (!this.world.getChunkManager().isChunkLoaded(chunk.getPos().x, chunk.getPos().z)) {
+            NbtList nbtList2 = new NbtList();
+
+            for (BlockPos blockPos : chunk.getBlockEntityPositions()) {
+                //nbtCompound3 = chunk.getPackedBlockEntityNbt(blockPos);
+
+                if (chunk instanceof WorldChunk) {
+                    BlockEntity blockEntity = chunk.getBlockEntity(blockPos);
+                    NbtCompound nbtCompound;
+                    if (blockEntity != null && !blockEntity.isRemoved()) {
+                        //nbtCompound = blockEntity.createNbtWithIdentifyingData();
+
+
+
+                        //
+                        nbtCompound.putBoolean("keepPacked", false);
+                        return nbtCompound;
+                    } else {
+                        nbtCompound = chunk.blockEntityNbts.get(blockPos);
+                        if (nbtCompound != null) {
+                            nbtCompound = nbtCompound.copy();
+                            nbtCompound.putBoolean("keepPacked", true);
+                        }
+                    }
+                    if (nbtCompound != null) {
+                        nbtList2.add(nbtCompound);
+                    }
+                }
+                //
+                if (chunk instanceof ProtoChunk) {
+                    BlockEntity blockEntity = chunk.getBlockEntity(blockPos);
+                    return blockEntity != null ?
+                            //blockEntity.createNbtWithIdentifyingData()
+
+
+                            //
+                            : chunk.blockEntityNbts.get(blockPos);
+                }
+
+            }
+
+            returnValue.put("block_entities", nbtList2);
+        }
+
+        return returnValue;
     }
 }
