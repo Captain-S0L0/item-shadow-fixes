@@ -11,7 +11,6 @@ public class PlayerInventoryMixin implements PlayerInventoryAccessor {
     PlayerInventory PI_instance = (PlayerInventory) (Object) this;
 
     public NbtList writeNbtDestroyShadows(NbtList nbtList) {
-        System.out.println("PlayerInventoryMixin");
         int i;
         NbtCompound nbtCompound;
         for(i = 0; i < PI_instance.main.size(); ++i) {
@@ -20,7 +19,7 @@ public class PlayerInventoryMixin implements PlayerInventoryAccessor {
                 nbtCompound.putByte("Slot", (byte)i);
                 (PI_instance.main.get(i)).writeNbt(nbtCompound);
                 nbtList.add(nbtCompound);
-                PI_instance.main.get(i).decrement(PI_instance.main.get(i).getCount());
+                PI_instance.main.get(i).setCount(0);
             }
         }
 
@@ -30,7 +29,7 @@ public class PlayerInventoryMixin implements PlayerInventoryAccessor {
                 nbtCompound.putByte("Slot", (byte)(i + 100));
                 (PI_instance.armor.get(i)).writeNbt(nbtCompound);
                 nbtList.add(nbtCompound);
-                PI_instance.armor.get(i).decrement(PI_instance.armor.get(i).getCount());
+                PI_instance.armor.get(i).setCount(0);
             }
         }
 
@@ -40,7 +39,7 @@ public class PlayerInventoryMixin implements PlayerInventoryAccessor {
                 nbtCompound.putByte("Slot", (byte)(i + 150));
                 (PI_instance.offHand.get(i)).writeNbt(nbtCompound);
                 nbtList.add(nbtCompound);
-                PI_instance.offHand.get(i).decrement(PI_instance.offHand.get(i).getCount());
+                PI_instance.offHand.get(i).setCount(0);
             }
         }
 

@@ -1,10 +1,14 @@
 package com.terriblefriends.itemshadowfixes;
 
+import com.terriblefriends.itemshadowfixes.commands.ShadowCommand;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 
 public class ItemShadowFixes implements ModInitializer {
     @Override
     public void onInitialize() {
-        //accessible field net/minecraft/server/PlayerManager saveHandler Lnet/minecraft/world/WorldSaveHandler;
+
+        CommandRegistrationCallback.EVENT.register(ShadowCommand::register);
+
     }
 }
