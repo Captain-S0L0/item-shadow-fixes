@@ -10,7 +10,8 @@
     "WorldSaveHandlerMixin",
     "ThreadedAnvilChunkStorageMixin",
     "EnderChestInventoryMixin",
-    "BlockEntityMixin"
+    "BlockEntityMixin",
+    "ShulkerBoxBlockMixin"
   ],
   "client": [
   ],

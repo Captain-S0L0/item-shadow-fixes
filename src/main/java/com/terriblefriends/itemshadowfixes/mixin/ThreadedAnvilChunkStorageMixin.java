@@ -135,7 +135,6 @@ public class ThreadedAnvilChunkStorageMixin {
 
                         //
                         nbtCompound.putBoolean("keepPacked", false);
-                        return nbtCompound;
                     } else {
                         nbtCompound = chunk.blockEntityNbts.get(blockPos);
                         if (nbtCompound != null) {
@@ -150,12 +149,16 @@ public class ThreadedAnvilChunkStorageMixin {
                 //
                 if (chunk instanceof ProtoChunk) {
                     BlockEntity blockEntity = chunk.getBlockEntity(blockPos);
-                    return blockEntity != null ?
+                    NbtCompound nbtCompound;
+                    nbtCompound =  blockEntity != null ?
                             blockEntity.createNbtWithIdentifyingData()
 
 
 
                             : chunk.blockEntityNbts.get(blockPos);
+                    if (nbtCompound != null) {
+                        nbtList2.add(nbtCompound);
+                    }
                 }
 
             }
