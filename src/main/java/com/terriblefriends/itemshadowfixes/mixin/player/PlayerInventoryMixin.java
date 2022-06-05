@@ -1,4 +1,4 @@
-package com.terriblefriends.itemshadowfixes.mixin;
+package com.terriblefriends.itemshadowfixes.mixin.player;
 
 import com.terriblefriends.itemshadowfixes.access.PlayerInventoryAccessor;
 import net.minecraft.entity.player.PlayerInventory;

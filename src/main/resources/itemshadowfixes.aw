@@ -14,3 +14,4 @@ accessible field net/minecraft/server/integrated/IntegratedPlayerManager userDat
 
 accessible method net/minecraft/server/world/ServerLightingProvider updateChunkStatus (Lnet/minecraft/util/math/ChunkPos;)V
 accessible method net/minecraft/server/integrated/IntegratedPlayerManager savePlayerData (Lnet/minecraft/server/network/ServerPlayerEntity;)V
+accessible class net/minecraft/server/world/ServerEntityManager$Status

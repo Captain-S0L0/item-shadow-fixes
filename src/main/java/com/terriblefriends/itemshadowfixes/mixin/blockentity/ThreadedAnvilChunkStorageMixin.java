@@ -1,4 +1,4 @@
-package com.terriblefriends.itemshadowfixes.mixin;
+package com.terriblefriends.itemshadowfixes.mixin.blockentity;
 
 import com.terriblefriends.itemshadowfixes.access.BlockEntityAccessor;
 import net.minecraft.block.entity.BlockEntity;

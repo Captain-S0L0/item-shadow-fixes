@@ -4,15 +4,19 @@
   "package": "com.terriblefriends.itemshadowfixes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PlayerManagerMixin",
-    "PlayerEntityMixin",
-    "PlayerInventoryMixin",
-    "WorldSaveHandlerMixin",
-    "ThreadedAnvilChunkStorageMixin",
-    "EnderChestInventoryMixin",
-    "BlockEntityMixin",
+    "player.PlayerManagerMixin",
+    "player.PlayerEntityMixin",
+    "player.PlayerInventoryMixin",
+    "player.WorldSaveHandlerMixin",
+    "player.EnderChestInventoryMixin",
+    "blockentity.ThreadedAnvilChunkStorageMixin",
+    "blockentity.BlockEntityMixin",
     "ShulkerBoxBlockMixin",
-    "ItemEntityMixin"
+    "ItemEntityMixin",
+    "entity.EntityChunkDataAccessMixin",
+    "entity.AbstractDonkeyEntityMixin",
+    "entity.ServerEntityManagerMixin",
+    "entity.StorageMinecartEntityMixin"
   ],
   "client": [
   ],
