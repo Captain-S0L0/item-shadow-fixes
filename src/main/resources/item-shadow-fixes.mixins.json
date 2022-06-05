@@ -11,7 +11,8 @@
     "ThreadedAnvilChunkStorageMixin",
     "EnderChestInventoryMixin",
     "BlockEntityMixin",
-    "ShulkerBoxBlockMixin"
+    "ShulkerBoxBlockMixin",
+    "ItemEntityMixin"
   ],
   "client": [
   ],
