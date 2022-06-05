@@ -31,7 +31,6 @@ public class ItemEntityMixin {
                 player.sendPickup(ie, i);
                 if (itemStack.isEmpty()) {
                     ie.discard();
-                    //itemStack.setCount(i);
                 }
 
                 player.increaseStat(Stats.PICKED_UP.getOrCreateStat(item), i);

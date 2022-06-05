@@ -1,10 +1,8 @@
 package com.terriblefriends.itemshadowfixes.mixin.entity;
 
-import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.SharedConstants;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.vehicle.StorageMinecartEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.math.ChunkPos;
