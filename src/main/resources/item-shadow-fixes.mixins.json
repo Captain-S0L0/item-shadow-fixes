@@ -8,7 +8,6 @@
     "player.PlayerEntityMixin",
     "player.PlayerInventoryMixin",
     "player.WorldSaveHandlerMixin",
-    "player.EnderChestInventoryMixin",
     "blockentity.ThreadedAnvilChunkStorageMixin",
     "blockentity.BlockEntityMixin",
     "ShulkerBoxBlockMixin",
